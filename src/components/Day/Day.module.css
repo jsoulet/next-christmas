@@ -1,0 +1,69 @@
+.day {
+  background-color: transparent;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.day.flipped .inner {
+  transform: rotateY(180deg);
+}
+
+.day:hover {
+  z-index: 1;
+}
+.day:hover .inner {
+  box-shadow: 0px 0px 80px rgba(0, 0, 0, 0.4);
+  transform: scale(1.02);
+}
+.day:hover.flipped .inner {
+  transform: scale(1.02) rotateY(180deg);
+}
+
+.inner {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s, box-shadow 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+.front {
+  background-color: #bbb;
+  color: black;
+}
+
+.back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
+}
+.flipped .back > * {
+  animation: revealContent 1s ease-in-out;
+}
+
+@keyframes revealContent {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

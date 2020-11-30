@@ -3,13 +3,66 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border: 1px solid #f1f1f1;
   perspective: 1000px;
   cursor: pointer;
+  font-family: var(--font-cursive);
 }
 
-.day.flipped .inner {
+/* .day.flipped {
+  animation: flipAndReveal 2s linear;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+@keyframes flipAndReveal {
+  0% {
+    opacity: 1;
+    position: relative;
+  }
+  25% {
+    opacity: 0;
+  }
+  30% {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+}
+
+.ghost {
+  display: block;
+  animation: witForDisplay 2s linear;
+}
+@keyframes witForDisplay {
+  0% {
+    display: none;
+  }
+  29% {
+    display: none;
+  }
+  30% {
+    display: block;
+  }
+  100% {
+    display: block;
+  }
+} */
+
+.day.flipped .inner,
+.day:hover.flipped .inner {
   transform: rotateY(180deg);
+  box-shadow: none;
 }
 
 .day:hover {
@@ -19,9 +72,6 @@
   box-shadow: 0px 0px 80px rgba(0, 0, 0, 0.4);
   transform: scale(1.02);
 }
-.day:hover.flipped .inner {
-  transform: scale(1.02) rotateY(180deg);
-}
 
 .inner {
   position: absolute;
@@ -29,7 +79,7 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  transition: transform 0.8s, box-shadow 0.5s ease;
+  transition: transform 1s, box-shadow 0.5s ease;
   transform-style: preserve-3d;
 }
 
@@ -40,20 +90,37 @@
   height: 100%;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
+  color: white;
+  border-radius: 5px;
 }
 
 .front {
-  background-color: #bbb;
-  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+}
+
+.front.variant0 {
+  background-color: var(--color-green);
+}
+.front.variant1 {
+  background-color: var(--color-brown);
+}
+.front.variant2 {
+  background-color: var(--color-pink);
+}
+.front.variant3 {
+  background-color: var(--color-red);
 }
 
 .back {
-  background-color: dodgerblue;
+  background-color: var(--color-darkBlue);
   color: white;
   transform: rotateY(180deg);
 }
 .flipped .back > * {
-  animation: revealContent 1s ease-in-out;
+  animation: revealContent 1s linear;
 }
 
 @keyframes revealContent {

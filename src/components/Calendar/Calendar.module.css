@@ -1,8 +1,8 @@
 .calendar {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, 1fr);
   width: 100%;
-  grid-gap: 5px;
+  grid-gap: 0.5rem;
 }
 
 .calendar > * {
@@ -11,23 +11,17 @@
 
 @media (min-width: 576px) {
   .calendar {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (min-width: 768px) {
   .calendar {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 992px) {
-  .calendar {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 992px) {
   .calendar {
     grid-template-columns: repeat(6, 1fr);
   }

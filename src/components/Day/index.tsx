@@ -9,17 +9,21 @@ export interface DayProps {
 const Day: React.FC<DayProps> = ({ number = 0 }) => {
   const [isFlipped, setIsFlipped] = useState(false)
   return (
-    <div
-      className={cn(styles.day, { [styles.flipped]: isFlipped })}
-      onClick={() => setIsFlipped(!isFlipped)}
-    >
-      <div className={styles.inner}>
-        <div className={styles.front}>{number}</div>
-        <div className={styles.back}>
-          <span>back</span>
+    <>
+      <div
+        className={cn(styles.day, { [styles.flipped]: isFlipped })}
+        onClick={() => setIsFlipped(!isFlipped)}
+      >
+        <div className={styles.inner}>
+          <div className={cn(styles.front, styles[`variant${number % 4}`])}>
+            {number}
+          </div>
+          {/* <div className={styles.back}>
+            <span>back</span>
+          </div> */}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

@@ -11,17 +11,7 @@ const PostPage = ({ post }) => {
 }
 
 export async function getStaticProps({ params }) {
-  const post = getPostBySlug(params.slug, [
-    "title",
-    "excerpt",
-    "date",
-    "slug",
-    "author",
-    "content",
-    "coverImage",
-    "coverImageAlt",
-    "draft",
-  ])
+  const post = getPostBySlug(params.slug)
   return {
     props: { post },
   }

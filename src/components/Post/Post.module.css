@@ -29,5 +29,9 @@
 }
 
 .category {
-  color: var(--color-grey);
+  color: var(--color-carmine);
+  text-align: center;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  opacity: 0.6;
 }

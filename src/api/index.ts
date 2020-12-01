@@ -22,10 +22,22 @@ interface MdxPost  {
   draft?: boolean
   content?: string
   slug?: string
-
+  category?: string
 }
 
-export function getPostBySlug(slug: string, fields: (keyof MdxPost)[] = []): MdxPost {
+export function getPostBySlug(slug: string, fields: (keyof MdxPost)[] = [
+  "title",
+  "excerpt",
+  "date",
+  "slug",
+  "author",
+  "content",
+  "coverImage",
+  "coverImageAlt",
+  "draft",
+  "category",
+  "calendarDay",
+]): MdxPost {
   const realSlug = slug.replace(/\.mdx$/, "")
   const fullPath = join(postsDirectory, `${realSlug}.mdx`)
   const fileContents = fs.readFileSync(fullPath, "utf8")

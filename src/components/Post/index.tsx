@@ -25,7 +25,9 @@ const BlogPost = ({ post }) => {
       )}
       <div className={styles.container}>
         <div className={styles.header}>
-          {post.category && <span className={styles.category}>{post.category}</span>}
+          {post.category && (
+            <div className={styles.category}>{post.category}</div>
+          )}
           <h1 className={styles.title}>{post.title}</h1>
           {post.date && (
             <span>

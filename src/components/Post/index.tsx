@@ -5,16 +5,18 @@ import { FC } from "react"
 // import Container from "../ui/Container"
 import CodeBlock from "./CodeBlock"
 import Image from "./Image"
+import Iframe from "./Iframe"
 // import DraftBadge from "../ui/DraftBadge"
+const isLocal = process.env.NODE_ENV === "development"
 
 import styles from "./Post.module.css"
 const BlogPost: FC<{ post: MdxPost }> = ({ post }) => {
-  const isLocal = process.env.NODE_ENV === "development"
   const components = {
     // Box: (props) => <Box {...props} />,
     // pre: (props) => <div {...props} />,
     code: CodeBlock,
     img: Image,
+    iframe: Iframe,
   }
   return (
     <>

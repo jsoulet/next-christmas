@@ -14,7 +14,7 @@ const Day: React.FC<DayProps> = ({ number = 0, slug }) => {
   useEffect(() => {
     if (isFlipped) {
       setTimeout(() => {
-        router.push(`${slug}`)
+        router.push(`${slug}`).then(() => window.scrollTo(0, 0))
       }, 100)
     }
   }, [isFlipped, router, slug])

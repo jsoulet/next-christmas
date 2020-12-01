@@ -1,6 +1,7 @@
 import React from "react"
 import Head from "next/head"
 import Calendar, { Day } from "src/components/Calendar"
+import Layout from "components/Layout"
 import styles from "../../styles/Home.module.css"
 import { getPostBySlug, getAllPosts } from "src/api"
 const isLocal = process.env.NODE_ENV === "development"
@@ -35,11 +36,7 @@ const orderedDays = [
 export default function Home({ slugPerDay }) {
   const dayOfMonth = React.useMemo(() => new Date().getDate(), [])
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Layout>
       <Calendar>
         {orderedDays.map((d) => (
           <Day
@@ -55,7 +52,7 @@ export default function Home({ slugPerDay }) {
           />
         ))}
       </Calendar>
-    </div>
+    </Layout>
   )
 }
 

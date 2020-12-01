@@ -1,12 +1,16 @@
 import BlogPost from "src/components/Post"
-import config from "src/blog.config.js"
+import Layout from "src/components/Layout"
 import { getPostBySlug, getAllPosts } from "src/api"
+import { FC } from "react"
 
-const PostPage = ({ post }) => {
+const PostPage: FC<{ post: MdxPost }> = ({ post }) => {
   return (
-    <div>
+    <Layout
+      title={`${post.calendarDay} dec : ${post.title}`}
+      previewImage={post.coverImage}
+    >
       <BlogPost post={post} />
-    </div>
+    </Layout>
   )
 }
 

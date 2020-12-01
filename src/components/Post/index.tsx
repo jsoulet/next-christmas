@@ -1,14 +1,14 @@
 import MDX from "@mdx-js/runtime"
-import config from "src/blog.config"
 
 import Link from "next/link"
+import { FC } from "react"
 // import Container from "../ui/Container"
 import CodeBlock from "./CodeBlock"
 import Image from "./Image"
 // import DraftBadge from "../ui/DraftBadge"
 
 import styles from "./Post.module.css"
-const BlogPost = ({ post }) => {
+const BlogPost: FC<{ post: MdxPost }> = ({ post }) => {
   const isLocal = process.env.NODE_ENV === "development"
   const components = {
     // Box: (props) => <Box {...props} />,

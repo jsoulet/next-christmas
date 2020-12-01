@@ -3,17 +3,19 @@ import config from "src/blog.config"
 
 import Link from "next/link"
 // import Container from "../ui/Container"
-// import CodeBlock from "../ui/CodeBlock"
+import CodeBlock from "./CodeBlock"
+import Image from "./Image"
 // import DraftBadge from "../ui/DraftBadge"
 
 import styles from "./Post.module.css"
 const BlogPost = ({ post }) => {
   const isLocal = process.env.NODE_ENV === "development"
-  // const components = {
-  //   Box: (props) => <Box {...props} />,
-  //   pre: (props) => <div {...props} />,
-  //   code: CodeBlock,
-  // }
+  const components = {
+    // Box: (props) => <Box {...props} />,
+    // pre: (props) => <div {...props} />,
+    code: CodeBlock,
+    img: Image,
+  }
   return (
     <>
       {post.coverImage && (
@@ -35,7 +37,7 @@ const BlogPost = ({ post }) => {
             </span>
           )}
         </div>
-        <MDX components={{}}>{post.content}</MDX>
+        <MDX components={components}>{post.content}</MDX>
       </div>
     </>
   )

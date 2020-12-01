@@ -1,7 +1,9 @@
+import React from "react"
 import Head from "next/head"
 import Calendar, { Day } from "src/components/Calendar"
 import styles from "../../styles/Home.module.css"
 import { getPostBySlug, getAllPosts } from "src/api"
+const isLocal = process.env.NODE_ENV === "development"
 
 const orderedDays = [
   8,
@@ -31,6 +33,7 @@ const orderedDays = [
 ]
 
 export default function Home({ slugPerDay }) {
+  const dayOfMonth = React.useMemo(() => new Date().getDate(), [])
   return (
     <div className={styles.container}>
       <Head>
@@ -39,7 +42,17 @@ export default function Home({ slugPerDay }) {
       </Head>
       <Calendar>
         {orderedDays.map((d) => (
-          <Day key={d} number={d} slug={slugPerDay?.[d] ?? "fallback"} />
+          <Day
+            key={d}
+            number={d}
+            slug={
+              isLocal
+                ? slugPerDay?.[d] ?? "fallback"
+                : dayOfMonth >= d && slugPerDay[d]
+                ? slugPerDay?.[d]
+                : "fallback"
+            }
+          />
         ))}
       </Calendar>
     </div>

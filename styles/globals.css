@@ -1,16 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap");
 
 html {
   --font-cursive: "Shadows Into Light", cursive;
+  --font-narrow: "Yanone Kaffeesatz", sans-serif;
   --font-sans-serif: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  /* https://colorpalette.org/christmas-ornament-decoration-color-palette/ */
-  --color-green: #6fab79;
+  /* https://colorpalette.org/red-christmas-leaf-color-palette/ */
+  --color-green: #59af73;
   --color-red: #c7353e;
   --color-pink: #d59093;
-  --color-darkBlue: #062d56;
+  --color-darkBlue: #213144;
   --color-brown: #5a473c;
   --color-gray: #d3d3d0;
+  /* https://www.schemecolor.com/christmas-sweater.php */
+  --color-carmine: #b63f37;
+  --color-pineGreen: #28655e;
+  --color-iceBlue: #9dcac7;
+  --color-gold: #d6a65e;
+  --color-white: #f1f6f1;
 }
 
 html,
@@ -22,13 +30,15 @@ body {
 html {
   font-family: "Shadows Into Light", cursive;
   font-family: var(--font-sans-serif);
-  background-color: var(--color-gray);
+  background-color: var(--color-white);
+  color: var(--color-darkBlue);
   font-size: 16px;
+  line-height: 1.5;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
+  color: var(--color-gold);
+  /* text-decoration: none; */
 }
 
 * {

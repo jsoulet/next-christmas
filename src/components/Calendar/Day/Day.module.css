@@ -90,7 +90,7 @@
   height: 100%;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
-  color: white;
+  color: var(--color-white);
   border-radius: 5px;
 }
 
@@ -102,16 +102,16 @@
 }
 
 .front.variant0 {
-  background-color: var(--color-green);
+  background-color: var(--color-pineGreen);
 }
 .front.variant1 {
-  background-color: var(--color-brown);
+  background-color: var(--color-carmine);
 }
 .front.variant2 {
-  background-color: var(--color-pink);
+  background-color: var(--color-iceBlue);
 }
 .front.variant3 {
-  background-color: var(--color-red);
+  background-color: var(--color-gold);
 }
 
 .back {

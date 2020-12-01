@@ -1,0 +1,99 @@
+---
+slug: 1-classnames
+title: Gérer les classNames facilement avec la bibliothèque classnames
+coverImage: https://images.unsplash.com/photo-1448832945950-bc85f82891bd?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1301&q=80
+calendarDay: 1
+category: Frontend
+---
+
+On commence le mois avec un utilitaire tout bête mais (quasi) indispensable pour tout projet React, même le plus petit et le plus éphémère... comme un calendrier de l'avent !
+
+## La naissance d'un code spaguetti
+
+Le JSX nous permet de décrire le rendu des composants React dans un format très proche du HTML, et, de la même façon qu'en HTML, il est possible d'affecter une classe à un élément afin d'en gérer le styling à l'aide de l'attribut `className`.
+
+```
+  const BlueButton = () => {
+    render <button
+      className="blue"
+      onClick={alert("I'm blue daboudi dabouda")}>
+        Click me
+    </button>
+  }
+```
+
+Comme on est dans un environnement JavaScript, on peut donc manipuler la classe pour qu'elle devienne dynamique. Or, on peut vite perdre en lisibilité si les conditions deviennent complexes.
+
+```
+  const BlueButton = ({isBig, isCentered, className}) => {
+    render <button
+      className={
+        `blue ${isBig ? 'big', ''}` ${isCentered ? 'center', ''} ${className || ''}`
+      }
+      onClick={alert("I'm blue daboudi dabouda")}>
+      Click me
+    </button>
+  }
+```
+
+On retrouvera par exemple ce genre de customisation lors de la création des composants de bases du design-system d'une application, puisque ceux-ci doivent être réutilisables au maximum mais s'appliquer à de nombreux cas d'usages et accépter plusieurs variantes (ex: bouton de couleurs primaire, secondaire ou terriaire, select simple, multiple ou avec auto-complétion, image de plusieurs taille en fonction du device...)
+
+On se retrouvera donc avec des template-string pleines d'opérations ternaires ou fallback et cette logique sera répétée pour de très nombreux composants. Clairement, on a pas besoin de se rajouter des boulets supplémentaires aux pieds et de gérer ce genre de chose à la main.
+
+## Se libérer de la gestion des classNames
+
+La petite librairie [classnames](https://github.com/JedWatson/classnames) permet de palier à ce problème en joignant conditionellement les classNames pour créer une chaine propre.
+
+classNames prend un nombre illimités d'arguments pouvant être au format :
+
+1. **string**
+
+```
+classNames('foo', 'bar'); // => 'foo bar'
+```
+
+2. **tableau**
+
+```
+classNames(['foo', 'bar']); // => 'foo bar'
+```
+
+3. **objet**
+
+```
+classNames({ 'foo-bar': true }); // => 'foo-bar'
+classNames({ 'foo-bar': false }); // => ''
+classNames('foo', { bar: true }); // => 'foo bar'
+classNames({ 'foo-bar': true }); // => 'foo-bar'
+classNames({ 'foo-bar': false }); // => ''
+classNames({ foo: true }, { bar: true }); // => 'foo bar'
+classNames({ foo: true, bar: true }); // => 'foo bar'
+```
+
+Toute "falsy values" sera ignorée
+
+```
+classNames(null, false, 'bar', undefined, 0, 1, { baz: null }, ''); // => 'bar 1'
+```
+
+## La cerise sur le gateau 🍒
+
+Si vous utilisez un outil qui génère des noms de classes dynamiques afin d'éviter tout side-effect dans votre CSS (comme CSS Modules), il est possible de décupler le potentiel de `classnames` en utilisant les propriété dynamiques d'objet introduites depuis ES6.
+
+```
+import styles from 'styles.module.css'
+// [...]
+
+classNames(
+  styles.blue,
+  {
+    [styles.isBlue]: true,
+    [styles.isCentered]: false,
+  }
+); // => 'blue isBlue'
+```
+
+## Pour conclure
+
+Cet utilitaire fait le taf, et seulement ça. En plus sa taille ridicule de [442B minifié+gzipé](https://bundlephobia.com/result?p=classnames@2.2.6) ne plombera pas les perfs de votre site ou appli.
+C'est pourquoi on le retrouve dans de nombreux projets React et s'il n'y est pas, ne pas hésiter à le rajouter tellement !

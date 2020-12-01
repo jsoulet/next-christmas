@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  background: white;
+  padding: 2rem;
+  margin: -100px auto 0;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+.coverImage {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  object-position: 50% 0%;
+}
+
+.title {
+  font-family: var(--font-narrow);
+  text-transform: uppercase;
+  font-size: 4rem;
+  text-align: center;
+  color: var(--color-pineGreen);
+  line-height: 1.1;
+}
+
+.category {
+  color: var(--color-grey);
+}

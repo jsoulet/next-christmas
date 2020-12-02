@@ -90,9 +90,9 @@ const Home: React.FC<HomeProps> = ({ posts }) => {
             handleOnOpen={() => {
               setOpenDays([...openDays, d])
               if (!shouldOpenDay(posts[d])) {
-                router.push("fallback").then(() => window.scrollTo(0, 0))
                 setTimeout(() => {
                   setOpenDays(openDays.filter((day) => day !== d))
+                  router.push("fallback").then(() => window.scrollTo(0, 0))
                 }, 500)
                 return false
               }

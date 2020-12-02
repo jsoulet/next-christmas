@@ -1,5 +1,5 @@
 import { FC } from "react"
-import styles from "./IFrame.module.css"
+import styles from "./Iframe.module.css"
 
 const Iframe: FC = (props) => {
   return <iframe className={styles.iframe} {...props} />

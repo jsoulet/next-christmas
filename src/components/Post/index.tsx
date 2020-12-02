@@ -20,16 +20,14 @@ const BlogPost: FC<{ post: MdxPost }> = ({ post }) => {
   return (
     <>
       {post.coverImage && (
-        <div className={styles.coverWrapper}>
-          <NextImage
-            layout="responsive"
-            className={styles.coverImage}
-            src={post.coverImage}
-            alt={post.coverImageAlt || ""}
-            height={500}
-            width={1200}
-          />
-        </div>
+        <img
+          // layout="responsive"
+          className={styles.coverImage}
+          src={post.coverImage}
+          alt={post.coverImageAlt || ""}
+          // height={500}
+          // width={1200}
+        />
       )}
       <div className={styles.container}>
         <div className={styles.header}>

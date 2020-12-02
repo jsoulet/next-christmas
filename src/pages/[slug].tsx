@@ -6,7 +6,11 @@ import { FC } from "react"
 const PostPage: FC<{ post: MdxPost }> = ({ post }) => {
   return (
     <Layout
-      title={`${post.calendarDay} dec : ${post.title}`}
+      title={
+        post.calendarDay
+          ? `${post.calendarDay} dec : ${post.title}`
+          : `${post.title}`
+      }
       previewImage={post.coverImage}
     >
       <BlogPost post={post} />

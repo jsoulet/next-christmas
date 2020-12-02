@@ -1,6 +1,5 @@
 import MDX from "@mdx-js/runtime"
-
-import Link from "next/link"
+import NextImage from "next/image"
 import { FC } from "react"
 // import Container from "../ui/Container"
 import CodeBlock from "./CodeBlock"
@@ -21,11 +20,16 @@ const BlogPost: FC<{ post: MdxPost }> = ({ post }) => {
   return (
     <>
       {post.coverImage && (
-        <img
-          className={styles.coverImage}
-          src={post.coverImage}
-          alt={post.coverImageAlt || ""}
-        />
+        <div className={styles.coverWrapper}>
+          <NextImage
+            layout="responsive"
+            className={styles.coverImage}
+            src={post.coverImage}
+            alt={post.coverImageAlt || ""}
+            height={500}
+            width={1200}
+          />
+        </div>
       )}
       <div className={styles.container}>
         <div className={styles.header}>

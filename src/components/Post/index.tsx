@@ -5,13 +5,14 @@ import { FC } from "react"
 import CodeBlock from "./CodeBlock"
 import Image from "./Image"
 import Iframe from "./Iframe"
-// import DraftBadge from "../ui/DraftBadge"
+import Link from "next/link"
+
 const isLocal = process.env.NODE_ENV === "development"
 
 import styles from "./Post.module.css"
 const BlogPost: FC<{ post: MdxPost }> = ({ post }) => {
   const components = {
-    // Box: (props) => <Box {...props} />,
+    Link: (props) => <Link {...props} />,
     // pre: (props) => <div {...props} />,
     code: CodeBlock,
     img: Image,
@@ -42,6 +43,9 @@ const BlogPost: FC<{ post: MdxPost }> = ({ post }) => {
           )}
         </div>
         <MDX components={components}>{post.content}</MDX>
+        <div className={styles.backLink}>
+          <Link href="/">Retourner au calendrier</Link>
+        </div>
       </div>
     </>
   )

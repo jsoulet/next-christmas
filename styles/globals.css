@@ -19,6 +19,11 @@ html {
   --color-iceBlue: #9dcac7;
   --color-gold: #d6a65e;
   --color-white: #f1f6f1;
+
+  --color-carmine-dark: #492825;
+  --color-pineGreen-dark: #1d2e2c;
+  --color-iceBlue-dark: #2d5351;
+  --color-gold-dark: #635035;
 }
 
 html,

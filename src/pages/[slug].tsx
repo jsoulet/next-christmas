@@ -1,5 +1,6 @@
 import BlogPost from "src/components/Post"
 import Layout from "src/components/Layout"
+
 import { getPostBySlug, getAllPosts } from "src/api"
 import { FC } from "react"
 

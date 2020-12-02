@@ -4,7 +4,10 @@ import Calendar, { Day } from "src/components/Calendar"
 import Layout from "components/Layout"
 import styles from "../../styles/Home.module.css"
 import { getPostBySlug, getAllPosts } from "src/api"
+import { useRouter } from "next/router"
+
 const isLocal = process.env.NODE_ENV === "development"
+const dayOfMonth = new Date().getDate()
 
 const orderedDays = [
   8,
@@ -33,8 +36,49 @@ const orderedDays = [
   7,
 ]
 
-export default function Home({ slugPerDay }) {
-  const dayOfMonth = React.useMemo(() => new Date().getDate(), [])
+type Post = {
+  title: string
+  slug: string
+  calendarDay: number
+}
+interface HomeProps {
+  posts: {
+    [calendarDay: string]: Post
+  }
+}
+
+const shouldOpenDay = (post: Post): boolean => {
+  return post && (isLocal || dayOfMonth >= post.calendarDay)
+}
+
+const saveOpenPosts = (ids: number[]) => {
+  const uniqIds = ids.filter((value, index, array) => {
+    return array.indexOf(value) === index
+  })
+  localStorage.setItem("openDays", JSON.stringify(uniqIds))
+}
+
+const getOpenPosts = (): [] => {
+  try {
+    return JSON.parse(localStorage.getItem("openDays")) || []
+  } catch {
+    return []
+  }
+}
+
+const Home: React.FC<HomeProps> = ({ posts }) => {
+  const router = useRouter()
+  const [openDays, setOpenDays] = React.useState<number[]>([])
+  React.useEffect(() => {
+    if (window) {
+      try {
+        setOpenDays(getOpenPosts())
+      } catch {}
+    }
+  }, [])
+  React.useEffect(() => {
+    saveOpenPosts(openDays)
+  }, [openDays])
   return (
     <Layout>
       <Calendar>
@@ -42,13 +86,20 @@ export default function Home({ slugPerDay }) {
           <Day
             key={d}
             number={d}
-            slug={
-              isLocal
-                ? slugPerDay?.[d] ?? "fallback"
-                : dayOfMonth >= d && slugPerDay[d]
-                ? slugPerDay?.[d]
-                : "fallback"
-            }
+            isOpen={openDays.includes(d)}
+            handleOnOpen={() => {
+              setOpenDays([...openDays, d])
+              if (!shouldOpenDay(posts[d])) {
+                router.push("fallback").then(() => window.scrollTo(0, 0))
+                setTimeout(() => {
+                  setOpenDays(openDays.filter((day) => day !== d))
+                }, 500)
+                return false
+              }
+              return true
+            }}
+            title={posts[d]?.title}
+            slug={posts[d]?.slug}
           />
         ))}
       </Calendar>
@@ -57,18 +108,20 @@ export default function Home({ slugPerDay }) {
 }
 
 export async function getStaticProps() {
-  const posts = getAllPosts(["slug", "calendarDay"])
+  const posts = getAllPosts(["slug", "calendarDay", "title"])
   return {
     props: {
-      slugPerDay: posts.reduce((accu, post) => {
+      posts: posts.reduce((accu, post) => {
         if (!post.calendarDay) {
           return accu
         }
         return {
           ...accu,
-          [post.calendarDay]: post.slug,
+          [post.calendarDay]: { ...post },
         }
       }, {}),
     },
   }
 }
+
+export default Home

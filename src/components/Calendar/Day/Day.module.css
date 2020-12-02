@@ -4,8 +4,16 @@
   width: 100%;
   height: 100%;
   perspective: 1000px;
-  cursor: pointer;
   font-family: var(--font-cursive);
+}
+
+.day a {
+  color: inherit;
+  text-decoration: none;
+}
+.day a:hover {
+  color: inherit;
+  text-decoration: underline;
 }
 
 /* .day.flipped {
@@ -99,28 +107,36 @@
   justify-content: center;
   align-items: center;
   font-size: 4rem;
+  cursor: pointer;
 }
 
-.front.variant0 {
+.variant0 > div {
   background-color: var(--color-pineGreen);
 }
-.front.variant1 {
+.variant1 > div {
   background-color: var(--color-carmine);
 }
-.front.variant2 {
+.variant2 > div {
   background-color: var(--color-iceBlue);
 }
-.front.variant3 {
+.variant3 > div {
   background-color: var(--color-gold);
 }
 
 .back {
   background-color: var(--color-darkBlue);
+  font-family: var(--font-narrow);
+  text-transform: uppercase;
   color: white;
   transform: rotateY(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  padding: 1rem;
 }
 .flipped .back > * {
-  animation: revealContent 1s linear;
+  animation: revealContent 1s ease-in;
 }
 
 @keyframes revealContent {

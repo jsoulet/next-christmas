@@ -1,33 +1,34 @@
-import { useState, useEffect } from "react"
 import cn from "classnames"
-import { useRouter } from "next/router"
+import Link from "next/link"
 import styles from "./Day.module.css"
 
 export interface DayProps {
   number?: number
+  title?: string
   slug?: string
+  isOpen?: boolean
+  handleOnOpen: () => boolean
 }
 
-const Day: React.FC<DayProps> = ({ number = 0, slug }) => {
-  const router = useRouter()
-  const [isFlipped, setIsFlipped] = useState(false)
-  useEffect(() => {
-    if (isFlipped) {
-      setTimeout(() => {
-        router.push(`${slug}`).then(() => window.scrollTo(0, 0))
-      }, 100)
-    }
-  }, [isFlipped, router, slug])
+const Day: React.FC<DayProps> = ({
+  number = 0,
+  slug,
+  isOpen,
+  title,
+  handleOnOpen,
+}) => {
   return (
     <>
       <div
-        className={cn(styles.day, { [styles.flipped]: isFlipped })}
-        onClick={() => setIsFlipped(!isFlipped)}
+        className={cn(styles.day, { [styles.flipped]: isOpen })}
         role="button"
       >
-        <div className={styles.inner}>
-          <div className={cn(styles.front, styles[`variant${number % 4}`])}>
+        <div className={cn(styles.inner, styles[`variant${number % 4}`])}>
+          <div className={cn(styles.front)} onClick={handleOnOpen}>
             {number}
+          </div>
+          <div className={styles.back}>
+            {slug && <Link href={slug}>{title}</Link>}
           </div>
         </div>
       </div>

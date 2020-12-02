@@ -40,7 +40,15 @@ const Layout: FC<LayoutProps> = ({
           <meta property="og:url" content={currentURL} key="ogurl" />
         )}
         {previewImage && (
-          <meta property="og:image" content={previewImage} key="ogimage" />
+          <meta
+            property="og:image"
+            content={
+              previewImage.includes("http")
+                ? previewImage
+                : `${currentURL}${previewImage}`
+            }
+            key="ogimage"
+          />
         )}
         {
           <meta

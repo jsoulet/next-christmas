@@ -1,5 +1,5 @@
 export default {
-  url: "https://christmas.johansoulet.fr/",
+  url: "https://christmas.johansoulet.fr",
   title: "Calendrier de l'Avent 2020",
   description:
     "Chaque jour, je vous propose un contenu tech, inspirant, culturel, fun...",

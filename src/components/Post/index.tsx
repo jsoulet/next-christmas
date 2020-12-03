@@ -5,6 +5,7 @@ import { FC } from "react"
 import CodeBlock from "./CodeBlock"
 import Image from "./Image"
 import Iframe from "./Iframe"
+import TwitterProfile from "./TwitterProfile"
 import Link from "next/link"
 
 const isLocal = process.env.NODE_ENV === "development"
@@ -17,6 +18,7 @@ const BlogPost: FC<{ post: MdxPost }> = ({ post }) => {
     code: CodeBlock,
     img: Image,
     iframe: Iframe,
+    TwitterProfile,
   }
   return (
     <>

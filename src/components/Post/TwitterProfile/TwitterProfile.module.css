@@ -1,0 +1,75 @@
+.card {
+  display: flex;
+  box-shadow: 0px 0px 0.5rem 0.25rem rgba(110, 110, 110, 0.1);
+  border: 1px solid #ededed;
+  margin: 2rem 0;
+  border-radius: 5px;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@media (min-width: 576px) {
+  .card {
+    flex-direction: row;
+  }
+  .card:nth-child(odd) {
+    flex-direction: row-reverse;
+  }
+}
+.picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.picture img {
+  max-width: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  height: 100%;
+  max-height: 150px;
+  border-radius: 50%;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.name {
+  font-size: 1.7rem;
+  text-align: center;
+  font-family: var(--font-narrow);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.username {
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--color-gray);
+  margin-bottom: 2rem;
+}
+
+.username:before {
+  content: "@";
+}
+
+.description {
+  color: var(--color-darkGray);
+  margin-bottom: 1rem;
+}
+
+.button {
+  color: var(--color-white);
+  background-color: var(--color-twitterBlue);
+  border: none;
+  border-radius: 30px;
+  padding: 5px 20px;
+  display: inline-block;
+  text-decoration: none;
+}

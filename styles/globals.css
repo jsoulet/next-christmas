@@ -12,13 +12,16 @@ html {
   --color-pink: #d59093;
   --color-darkBlue: #213144;
   --color-brown: #5a473c;
-  --color-gray: #d3d3d0;
+  --color-lightGray: #d3d3d0;
+  --color-gray: #94989c;
+  --color-darkGray: #4c545c;
   /* https://www.schemecolor.com/christmas-sweater.php */
   --color-carmine: #b63f37;
   --color-pineGreen: #28655e;
   --color-iceBlue: #9dcac7;
   --color-gold: #d6a65e;
   --color-white: #f1f6f1;
+  --color-twitterBlue: #49a1eb;
 
   --color-carmine-dark: #492825;
   --color-pineGreen-dark: #1d2e2c;

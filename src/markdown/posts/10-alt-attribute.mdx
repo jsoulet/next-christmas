@@ -1,0 +1,73 @@
+---
+slug: 10-alt-attribute
+title: Rendre ses images accessibles avec l'attribut alt
+coverImage: /posts/10/cover.jpeg
+calendarDay: 10
+category: Accessibilité
+---
+
+En HTML, l'attribut `alt` peut être placé sur une image afin d'en décrire textuellement le contenu, dans le but d'apporter la même information que l'image, si celle-ci ne peut être chargée (image non disponnible, problème de connexion...) ou non-visible (robot scrapper, utilisateur d'un lecteur d'écran...). Lorsque cet attribut n'est pas renseigné, un lecteur d'écran lira le nom de l'image. On imagine clairement qu'entendre `http://server.com/static/img/bnd7jadljd8lknz09bdnjkd6nbce.jpeg` va être tres pénible pour le visiteur.
+
+Alors il est primordial de renseigner cet attribut pour **chaque** image... Pour savoir précisément ce qu'on va mettre dans ce champ, on se demandera pourquoi cette image existe, quel est le contexte et comment apporter du sens à la page que l'on est en train de créer.
+
+## Analyse du sens de l'image
+
+Si l'image est purement décorative, il faudra laisser le champ alt vide `<img alt="" src="deco.jpg"/>`. (vide, mais tout de même présent)
+Pour une image porteuse de sens, on s'interrogera si elle présente une information déjà présente dans la page (ex: lien composé d'une icone + texte), dans ce cas, on aurra aussi un `alt` vide.
+
+Si l'image est un lien, ou déclenche une action au clic, il faudra renseigne ce qui se passe.
+`<img alt="Voir le profil" src="john-doe.jpg"/>`
+
+Si le sens est simple, on pourra remplire une breve description `<img alt="Paella royale" src="paella.jpg"/>`, en faisant attention à ne pas dupliquer de contenu si une légende est présente.
+
+Si le sens est plus complexe, on pourra se servir de l'attribut `longdesc` pour ajouter un lien vers une page qu
+`<img alt="Seconde loi de Kepler" src="kepler.jpg" longdesc="https://fr.wikipedia.org/wiki/Lois_de_Kepler"/>`
+
+### Quelques points d'attention
+
+La formulation de la description est importante pour ne pas être redondante, c'est pourquoi on préfèrera utiliser _"Paella royale"_ à _"Photo de paella royale"_ : grace au tag `<img />` on savait déjà qu'on avait affaire à une image.
+
+Si le site est multiingue, les valeurs des champs `alt` devront être traduits pour permettre aux visiteur de bénéficier
+
+## Mise en pratique
+
+Est-ce que c'est plus clair ?
+
+On va essayer de mettre ces notions en pratique. Voici 3 mockups d'interfaces, avec des images. Comment renseigner l'attribut `alt` ?
+
+1. **Menu de navigation mobile**
+   ![](/posts/10/nav.png)
+2. **Avatar de l'auteur du commentaire**
+   ![](/posts/10/avatar.png)
+3. **Météo du jour**
+   ![](/posts/10/weather.png)
+
+<details>
+  <summary>Afficher les réponses</summary>
+  <ol>
+    <li>
+      Les images sont des liens, donc il faut indiquer ce qui se passer quand on
+      clique dessus : aller à l'accueil, voir le profil, nous contacter
+    </li>
+    <li>
+      Le nom de l'auteur est déjà présent à côté, donc pas besoin de duppliquer
+      l'information. On peut laisser le alt vide
+    </li>
+    <li>
+      Sans l'image, on ne peut connaitre la météo. Il est donc primordial de
+      renseigner la description textuelle des picto : éclaircies, ensoleillé,
+      couvert
+    </li>
+  </ol>
+</details>
+
+## Un cas particulier : les images "sensorielles"
+
+Certaines images peuvent être utilisées afin de véhiculer une émotion: elles sont certes décoratives, mais elles ont une grande importance dans le message qui est transmis. C'est par exemple le cas des publications sur les réseaux sociaux. Il est donc important de trouver un moyen de faire passer cette émotion au visiteur, d'en décrire le contenu et à minima de donner le nom de l'oeuvre, l'auteur, la date de publication.
+
+En fonction du réseau social, les stratégies mises en place pour remplir ce champ seront différentes.
+
+- Sur Facebook et Instagram, des réseaux de machine learning analysent les photos pour essayer de proposer une description.
+  Ex : "Photo de Capitaine Haddock, le 3 mars 2018. L'image contient peut-être: 2 personnes debout à l'extérieur"
+- Sur Twitter, l'auteur du tweet peut renseigner lui-même une description alternative.
+  Cette stratégie a le mérite de proposer une description plus pertinente, mais elle reste moins fréquement utilisée.

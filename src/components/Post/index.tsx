@@ -1,16 +1,18 @@
 import MDX from "@mdx-js/runtime"
 import NextImage from "next/image"
-import { FC } from "react"
+import React, { FC } from "react"
 // import Container from "../ui/Container"
 import CodeBlock from "./CodeBlock"
 import Image from "./Image"
 import Iframe from "./Iframe"
 import TwitterProfile from "./TwitterProfile"
 import Link from "next/link"
+import Head from "next/head"
 
 const isLocal = process.env.NODE_ENV === "development"
 
 import styles from "./Post.module.css"
+
 const BlogPost: FC<{ post: MdxPost }> = ({ post }) => {
   const components = {
     Link: (props) => <Link {...props} />,
@@ -22,6 +24,15 @@ const BlogPost: FC<{ post: MdxPost }> = ({ post }) => {
   }
   return (
     <>
+      <Head>
+        {post.withTwitterScript && (
+          <script
+            async
+            src="https://platform.twitter.com/widgets.js"
+            charSet="utf-8"
+          ></script>
+        )}
+      </Head>
       {post.coverImage && (
         <img
           // layout="responsive"

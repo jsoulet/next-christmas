@@ -7,23 +7,7 @@ export function getPostSlugs() {
   return fs.readdirSync(postsDirectory)
 }
 
-interface MdxPost  {
-  title?: string
-  excerpt?: string
-  calendarDay?: number
-  coverImage?: string
-  date?: string
-  author?: {
-    name?: string
-    image?: string
-  }
-  ogImage?: string
-  coverImageAlt?: string
-  draft?: boolean
-  content?: string
-  slug?: string
-  category?: string
-}
+
 
 export function getPostBySlug(slug: string, fields: (keyof MdxPost)[] = [
   "title",
@@ -37,6 +21,7 @@ export function getPostBySlug(slug: string, fields: (keyof MdxPost)[] = [
   "draft",
   "category",
   "calendarDay",
+  "withTwitterScript"
 ]): MdxPost {
   const realSlug = slug.replace(/\.mdx$/, "")
   const fullPath = join(postsDirectory, `${realSlug}.mdx`)

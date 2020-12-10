@@ -14,4 +14,5 @@ interface MdxPost  {
   content?: string
   slug?: string
   category?: string
+  withTwitterScript?: boolean 
 }

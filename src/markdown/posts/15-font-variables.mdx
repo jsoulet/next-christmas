@@ -1,0 +1,193 @@
+---
+slug: 15-font-variables
+title: All Characters Are Beautiful
+coverImage: /posts/15/cover.jpeg
+calendarDay: 15
+category: Frontend
+---
+
+Aujourd'hui nous allons parler de police. Pas celle qui permet aux castes dirigeantes de conserver leurs privilèges, mais plus précisément de typographie.
+
+Annoncées en septembre 2016, les _variable font_ sont une extension du standard [OpenType](https://fr.wikipedia.org/wiki/OpenType) qui permet de stocker dans un seul fichier un spectre continu de variations d'une police. Dans cet article, nous allons voir ce que ça signifie concrètement 🤔
+
+Avant de rentrer dans le détail des font variables, revenons sur le fonctionnement des font classiques dans le web.
+
+## Historique
+
+Depuis CSS1, on peut en définir une liste de polices dans la propriété font-family. Les sites web ne pouvaient utiliser que les font installée sur la machine du client et, pour éviter d'avoir à demander à chaque visiteur de télécharger et d'installer manuellement une font, on se contentait des font par défaut : Times New Roman, Arial, Verdana, Georgia...
+
+```css
+html {
+  font-family: Arial, Verdana, sans-serif;
+}
+```
+
+La règle `@font-face` a ensuite permis aux auteurs de définir des polices personnalisées et de les utiliser dans les reste des pages. Elles se basent sur des fichiers qui peuvent être locaux mais surtout télécharger de nouvelles polices sans avoir à les installer globalement sur la machine. C'est une grande révolution dans le domaine du web design !
+
+```css
+@font-face {
+  font-family: "Open Sans";
+  src: url("/fonts/OpenSans-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("/fonts/OpenSans-Bold.woff2") format("woff2");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("/fonts/OpenSans-Italic.woff2") format("woff2");
+  font-style: italic;
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url("/fonts/OpenSans-BoldItalic.woff2") format("woff2");
+  font-weight: bold;
+  font-style: italic;
+}
+```
+
+On comprend ici qu'il sera de la responsabilité du développeur•euse de bien préciser à quel fichier correspond quel nom, quelle graisse, quel style.
+
+Avant de découvrir comment une police peut varier, vous pouvez aller expérimenter ces polices sur [V-Fonts.com](https://v-fonts.com/) : en jouant avec les curseurs, vous pourrez visualiser les transformations de la police le long d'un ou plusieurs spectres continus.
+
+Voici un exemple de ce à quoi peut ressembler la police Hyperspace Race Variable quand on fait varier sa graisse, sa largeur ou sa pente
+![](/posts/15/hyperspace.jpg)
+
+## Faire varier sa police
+
+Les designers peuvent se baser sur **5 axes de variation standard** lorsqu'ils conçoivent une police. On peut les définir soit avec des propriété CSS (cas recommandé par le CSS working group) classiques, soit avec la propriété globale `font-variation-settings`, une nouvelle propriétés CSS spécifique. Cette dernière prend en paramètres deux éléments : le code de l'axe de variation entre guillements et la valeur de l'axe ensuite.
+
+- **La graisse** est l'épaisseur du trait des caractères. Elle se manipule à l'ade de ma propriété `font-weight: 493` peut être compris entre 1 et 999.
+
+  Alternative : `font-variation-settings: 'wght' 493`
+
+- **La largeur** = l'étroitesse des caractères, elle est définie par la propriété `font-width: 87%` qui est un pourcentage, supérieur ou inférieur à 100%.
+
+  Alternative : `font-variation-settings: 'wdth' 87`
+
+- **L'italique** peut être soit activé, soit désactivé avec la propriété `font-style: italic`
+
+  Alternative : `font-variation-settings: 'ital' 1`
+
+- **L'oblique** est contrairement à l'iyalique continu, entre -90deg et 90deg. Il s'applique à l'aide d'une variation de font-style, plus complexe que pour l'italique : `font-style: oblique 10deg`
+
+  Alternative : `font-variation-settings: 'slnt' 10`
+
+- **La taille optique** est prise en charge à l'aide de na nouvelle propriété CSS `font-optical-sizing`. Elle désigne des variations épaisseur du trait pour faciliter la lecture sur les petits écrans.
+
+  Alternative : `font-variation-settings: 'opsz' 45`
+
+- **Le grade** est la densité du trait. Il n'a pas de propriété CSS standard et devra être actionnées à l'aide de `font-variation-settings: 'GRAD' 70;`
+
+Comme pour beaucoup d'autres propriété CSS, les valeurs de `font-variation-settings` peuvent se cumuler
+
+```css
+p {
+  font-variation-settings: "wght" 630, "wdth" 88, "GRAD" 70;
+}
+```
+
+## Encore plus de variations
+
+Pour aller plus loin dans les variations, les designers peuvent définir dans leur fichier de police des variables supplémentaires aux 5 présentées ci-dessus. C'est par exemple ce qu'à fait l'auteur de [Boring Sans Variable](https://v-fonts.com/fonts/boring-sans-variable) pour le paramettre 'wrdn' qui défini la bizarrerie (weirdness) de sa police.
+
+Côté CSS, on pourra utiliser les animation et effets de transitions natifs afin de créer une expérience smooth si la police doit être modifiée dynamiquement.
+
+```css
+.content {
+  font-family: "Custom Variant Font";
+  animation: breathing 5s ease-out infinite normal;
+}
+
+@keyframes breathing {
+  0% {
+    font-width: 85%;
+  }
+
+  25% {
+    font-width: 100%;
+  }
+
+  60% {
+    font-width: 85%;
+  }
+
+  100% {
+    font-width: 100%;
+  }
+}
+```
+
+## Cas d'usages
+
+Cette spécificité reste malheureusement assez confidentielle ce qui fait qu'elle n'est que très peu utilisé malgré son potentiel. Des sites qui utiliseraient plusieurs polices différentes, dans plusieurs graisses pou style chargent souvent beaucoup de fichiers de polices différentes. Grâce au font-variant, les
+
+Mais on peut imaginer que des entreprises ayant besoin polices dans de nombreux textes, pourraient créer une seule font variable pour accepter de multiples variations tout en conservant une homogénéité générale.
+
+Les font variables pourraient aussi être utilisées pour l'accessibilité de textes. Des utilisateurs dyslexiques pourraient adapter la forme des textes pour avoir une expérience de lecture parfaitement adaptée, sans avoir besoin de télécharger des ressources supplémentaires.
+
+## Quelques ressources pour aller plus loin
+
+Dans son codepen, Mandy Michael expérimente de façon artistique autour des font variables. Elle anime ses texte pour les faire [fleurir](https://codepen.io/mandymichael/pen/YYaWop), [dégouliner](https://codepen.io/mandymichael/pen/pxXNbr)...
+
+<iframe
+  height="300"
+  style={{ width: "100%" }}
+  scrolling="no"
+  title="Oooze / Slime Text"
+  src="https://codepen.io/mandymichael/embed/pxXNbr?height=300&theme-id=light&default-tab=result"
+  frameborder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowfullscreen="true"
+>
+  See the Pen{" "}
+  <a href="https://codepen.io/mandymichael/pen/pxXNbr">Oooze / Slime Text</a> by
+  Mandy Michael (<a href="https://codepen.io/mandymichael">@mandymichael</a>) on{" "}
+  <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<iframe
+  height="300"
+  style={{ width: "100%" }}
+  scrolling="no"
+  title="Growing Grassy Text with Variable fonts."
+  src="https://codepen.io/mandymichael/embed/YYaWop?height=300&theme-id=light&default-tab=result"
+  frameborder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowfullscreen="true"
+>
+  See the Pen{" "}
+  <a href="https://codepen.io/mandymichael/pen/YYaWop">
+    Growing Grassy Text with Variable fonts.
+  </a>{" "}
+  by Mandy Michael (<a href="https://codepen.io/mandymichael">@mandymichael</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+<iframe
+  height="300"
+  style={{ width: "100%" }}
+  scrolling="no"
+  title='Variable font "gravity" scroll using Chee'
+  src="https://codepen.io/mandymichael/embed/LJeZBO?height=300&theme-id=light&default-tab=result"
+  frameborder="no"
+  loading="lazy"
+  allowtransparency="true"
+  allowfullscreen="true"
+>
+  See the Pen{" "}
+  <a href="https://codepen.io/mandymichael/pen/LJeZBO">
+    Variable font &quot;gravity&quot; scroll using Chee
+  </a>{" "}
+  by Mandy Michael (<a href="https://codepen.io/mandymichael">@mandymichael</a>)
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+En utilisant les API Javascript elle crée aussi de véritables expériences interactives entre l'utilisateur et la font comme [cette page](https://codepen.io/mandymichael/full/OYpqdP) où elle capte le bruit ambiant pour faire varier la graisse. Pour la tester, ouvrez le [codepen en plein écran](https://codepen.io/mandymichael/full/OYpqdP), acceptez l'utilisation du micro et tapez dans vos mains. 👏👏👏
+
+## Support navigateur
+
+Les navigateurs modernes supportent maintenant bien les variable fonts et [caniuse.com](https://caniuse.com/?search=variable%20font) annonce que plus de 92% des navigateurs du marché l'acceptent.

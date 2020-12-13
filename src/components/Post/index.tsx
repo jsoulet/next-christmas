@@ -3,6 +3,7 @@ import NextImage from "next/image"
 import React, { FC } from "react"
 // import Container from "../ui/Container"
 import CodeBlock from "./CodeBlock"
+import InlineCode from "./InlineCode"
 import Image from "./Image"
 import Iframe from "./Iframe"
 import TwitterProfile from "./TwitterProfile"
@@ -18,6 +19,7 @@ const BlogPost: FC<{ post: MdxPost }> = ({ post }) => {
     Link: (props) => <Link {...props} />,
     // pre: (props) => <div {...props} />,
     code: CodeBlock,
+    inlineCode: InlineCode,
     img: Image,
     iframe: Iframe,
     TwitterProfile,

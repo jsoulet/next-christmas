@@ -1,0 +1,83 @@
+---
+slug: 17-react-hooks
+title: Comprendre les React Hooks pour mieux les utiiser
+coverImage: /posts/17/cover.jpg
+calendarDay: 17
+category: Frontend
+---
+
+Disponibles depuis 2018 dans la version 16.8, les **Hooks** sont une grande révolution dans le monde des dévelppeur•euse•s React. Ils permettent enfin de se débarasser des classes (je ne rentrerai pas dans les détails de pourquoi c'est une hérésie, [d'autres l'ont bien fait](https://everyday.codes/javascript/please-stop-using-classes-in-javascript/) avant moi).
+
+```jsx
+const Counter = () => {
+  const [value, setValue] = useState(0)
+  return (
+    <div>
+      <button
+        aria-label="Decrease"
+        onClick={() => {
+          setValue(value - 1)
+        }}
+      >
+        -
+      </button>
+      <div>{value}</div>
+      <button
+        aria-label="Increase"
+        onClick={() => {
+          setValue(value + 1)
+        }}
+      >
+        +
+      </button>
+    </div>
+  )
+}
+```
+
+De prime abord, ça parrait quand même assez magique. Qu'est-ce qui se passe dans `useState` pour renvoyer une valeur et son setter, qui lui même va provoquer un re-rendu du composant... Avec un oeil extérieur, ça peut faire des noeuds au cerveau. Les hooks sont fait pour être garants de l'ensemble des données et comportements de l'application, on comprend alors que s'il sont mal utilisés, il peuvent être source de bugs, sous-performances, code spaguetti... 🍝
+
+Il est donc de la responsabilité de chaque dévelopeur•euse de se renseigner sur comment les hooks fonctionnent avec React et comment les utiliser correctement pour créer un code de qualité. Voici quelques pistes pour creuser le sujet :
+
+## 1. Comprendre comment les hooks marchent
+
+Pour répondre à ce genre de question, on commencera par aller chercher du côté de la [documentation officielle de React](https://reactjs.org/docs/hooks-intro.html). Ces dernières années, elle a été bien étoffée et elle est à présent un véritable point d'entrée quand on souhaite monter en compétence sur React, grâce au partage de bonnes ou mauvaises pratiques, aux motivations intrinsèques de certaines fonctionalités... En somme c'est plus un manuel d'utilisation qu'une documentation.
+
+Mais le côté mystique des hooks persiste un peu. Alors pour comprendre un peu plus ce qui se passe sous le capot, j'avais vraiment adoré la première partie de cette vidéo, où [Ryan Florence](https://twitter.com/ryanflorence) re-développe from scratch et avec humour la fonction useState.
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube-nocookie.com/embed/1jWS7cCuUXw"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>
+
+## 2. Découvrir les hooks avancés
+
+Une fois que les hooks principaux (useState, useEffect) sont assimilés, on peut commencer à les intégrer au sein d'app nouvelles ou existantes : les hooks étant compatibles avec les class, il est possible que ces deux façon de concevoir des composants React vivent au sein d'une même app.
+
+Cependant, même s'ils pourraient presque se suffir, utiliser seulement useEffect et useState va irrémédiablement faire tendre votre code vers un gros ramassi de spaguetti alors que c'est exactement ce qu'on voulait éviter à l'origine. On ira donc ensuite creuser parmi les hooks avancés proposés nativement par React
+
+- **useReducer** offre un pattern similaire à celui proposé par Redux, mais à l'échelle du composant cette fois et non plus à l'échelle de l'app complète, ce qui réduit les chances de faire de votre state un monstre tantaculaire.
+- **useMemo** qui permet de garder en mémoire le résultat d'opération complexe et/ou couteuses (ex : tri de tableau) pour ne pas les rejouer à chaque re-rendu.
+- **useContext** pour lire un Contexte (cf: [Context API](https://reactjs.org/docs/context.html)) et s'abonner à ses chagements.
+- ... et encore d'autres qu'on retrouvera dans la [doc](https://reactjs.org/docs/hooks-reference.html#additional-hooks)
+
+## 3. Créer ses propres hooks pour séparer les responsabilités
+
+On dit traditionellement que **les composants sont pour l'affichage et les hooks sont pour le comportement**, mais il n'y a pas de règle absolu et rien n'empêche un•e dévelopeur•euse de créer de nombreux hooks interdépendants au sein d'un même comosants. C'est donc à chacun de coder en bonne intelligence: c'est ok de stocker le state d'un Toggle, mais c'est pas ok de gérer les états d'un formulaire multi-step au sein d'un seul composant. Pour ce genre ce cas d'usage, on peut externaliser la logique dans un hook personnalisé.
+
+Un hook personnalisé est une fonction externe au composant (et donc dans un fichier différent ! 👮‍♂️) qui pourra appeller d'autres hooks. Par convention cette fonction commencera par use*YourImagination*... et c'est pas plus dur que ça ! Alors si vous commencez à avoir 2-3 hooks qui ont des effets croisés, n'hésitez plus à créer votre propre hooks.
+
+Personellement, c'est une pratique que j'applique depuis peu mais dont j'ai très vite vu les bénéfices pour la construction d'un code plus lisble et plus maintenable. La prochaine étape sera de maitriser les test unitaires sur ces hooks personnalisés.
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube-nocookie.com/embed/9lkZ77m-39I"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen
+></iframe>

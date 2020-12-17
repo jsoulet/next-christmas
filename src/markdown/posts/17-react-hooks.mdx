@@ -67,7 +67,7 @@ Cependant, même s'ils pourraient presque se suffir, utiliser seulement useEffec
 
 ## 3. Créer ses propres hooks pour séparer les responsabilités
 
-On dit traditionellement que **les composants sont pour l'affichage et les hooks sont pour le comportement**, mais il n'y a pas de règle absolu et rien n'empêche un•e dévelopeur•euse de créer de nombreux hooks interdépendants au sein d'un même comosants. C'est donc à chacun de coder en bonne intelligence: c'est ok de stocker le state d'un Toggle, mais c'est pas ok de gérer les états d'un formulaire multi-step au sein d'un seul composant. Pour ce genre ce cas d'usage, on peut externaliser la logique dans un hook personnalisé.
+On dit traditionellement que **les composants sont pour l'affichage et les hooks sont pour le comportement**, mais il n'y a pas de règle absolu et rien n'empêche un•e dévelopeur•euse de créer de nombreux hooks interdépendants au sein d'un même composants. C'est donc à chacun de coder en bonne intelligence: c'est ok de stocker le state d'un Toggle, mais c'est pas ok de gérer les états d'un formulaire multi-step au sein d'un seul composant. Pour ce genre ce cas d'usage, on peut externaliser la logique dans un hook personnalisé.
 
 Un hook personnalisé est une fonction externe au composant (et donc dans un fichier différent ! 👮‍♂️) qui pourra appeller d'autres hooks. Par convention cette fonction commencera par use*YourImagination*... et c'est pas plus dur que ça ! Alors si vous commencez à avoir 2-3 hooks qui ont des effets croisés, n'hésitez plus à créer votre propre hooks.
 

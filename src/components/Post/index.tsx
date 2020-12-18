@@ -8,6 +8,7 @@ import Image from "./Image"
 import Iframe from "./Iframe"
 import TwitterProfile from "./TwitterProfile"
 import Link from "next/link"
+import Carousel from "./Carousel"
 import Head from "next/head"
 
 const isLocal = process.env.NODE_ENV === "development"
@@ -17,12 +18,12 @@ import styles from "./Post.module.css"
 const BlogPost: FC<{ post: MdxPost }> = ({ post }) => {
   const components = {
     Link: (props) => <Link {...props} />,
-    // pre: (props) => <div {...props} />,
     code: CodeBlock,
     inlineCode: InlineCode,
     img: Image,
     iframe: Iframe,
     TwitterProfile,
+    Carousel,
   }
   return (
     <>

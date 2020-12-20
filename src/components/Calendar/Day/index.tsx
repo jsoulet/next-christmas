@@ -28,6 +28,7 @@ const Day: React.FC<DayProps> = ({
             {number}
           </div>
           <div className={styles.back}>
+            <div className={styles.number}>{number}</div>
             {slug && <Link href={slug}>{title}</Link>}
           </div>
         </div>

@@ -150,3 +150,10 @@
     opacity: 1;
   }
 }
+
+.back .number {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  opacity: 0.6;
+}

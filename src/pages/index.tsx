@@ -1,13 +1,10 @@
 import React from "react"
-import Head from "next/head"
 import Calendar, { Day } from "src/components/Calendar"
 import Layout from "components/Layout"
-import styles from "../../styles/Home.module.css"
-import { getPostBySlug, getAllPosts } from "src/api"
+import { getAllPosts } from "src/api"
 import { useRouter } from "next/router"
 
 const isLocal = process.env.NODE_ENV === "development"
-const dayOfMonth = new Date().getDate()
 
 const orderedDays = [
   8,
@@ -48,7 +45,9 @@ interface HomeProps {
 }
 
 const shouldOpenDay = (post: Post): boolean => {
-  return post && (isLocal || dayOfMonth >= post.calendarDay)
+  return (
+    post && (isLocal || new Date() >= new Date(`2012-12-${post.calendarDay}`))
+  )
 }
 
 const saveOpenPosts = (ids: number[]) => {

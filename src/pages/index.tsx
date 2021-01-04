@@ -46,7 +46,7 @@ interface HomeProps {
 
 const shouldOpenDay = (post: Post): boolean => {
   return (
-    post && (isLocal || new Date() >= new Date(`2012-12-${post.calendarDay}`))
+    post && (isLocal || new Date() >= new Date(`2020-12-${post.calendarDay}`))
   )
 }
 
